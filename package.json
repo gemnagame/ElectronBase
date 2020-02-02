@@ -17,6 +17,8 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^7.1.9"
+    "electron": "^7.1.9",
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3"
   }
 }
