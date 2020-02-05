@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -8,40 +8,14 @@ let mainWindow
 
 const axios = require("axios");
 const cheerio = require("cheerio");
-const log = console.log;
 
-const getHtml = async () => {
+const getHtml = async (url) => {
   try {
-    //return await axios.get("https://www.yna.co.kr/sports/all");
-    return await axios.get("http://www.okcashbag.com/life/exchange/exchangeMain.do");
+    return await axios.get(url);
   } catch (error) {
     console.error(error);
   }
 };
-
-getHtml()
-  .then(html => {
-    let ulList = [];
-    const $ = cheerio.load(html.data);
-    //const $bodyList = $("div.headline-list ul").children("li.section02");
-    const $bodyList = $("div.point-list-wrap2 ul").children("li");
-
-    $bodyList.each(function(i, elem) {
-      ulList[i] = {
-        title: $(this).find('dt').text()
-          // title: $(this).find('strong.news-tl a').text(),
-          // url: $(this).find('strong.news-tl a').attr('href'),
-          // image_url: $(this).find('p.poto a img').attr('src'),
-          // image_alt: $(this).find('p.poto a img').attr('alt'),
-          // summary: $(this).find('p.lead').text().slice(0, -11),
-          // date: $(this).find('span.p-time').text()
-      };
-    });
-
-    const data = ulList.filter(n => n.title);
-    return data;
-  })
-  .then(res => log(res));
 
 function createWindow () {
   // Create the browser window.
@@ -49,6 +23,7 @@ function createWindow () {
     width: 800,
     height: 600,
     webPreferences: {
+      nodeIntegration: true,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -58,6 +33,23 @@ function createWindow () {
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
+
+  ipcMain.on('asynchronous-message', (event, arg) => {
+    console.log(arg);
+
+    getHtml(arg)
+      .then(html => {
+
+        const $ = cheerio.load(html.data);
+        var screenshot_data = $("div.point-list-wrap2 ul").html();        
+        //var screenshot_data = $("body").html();
+        event.sender.send('asynchronous-reply', screenshot_data);
+      
+        //return data;
+      })
+    // .then(res => console.log(res));
+  });
+
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
