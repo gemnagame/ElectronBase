@@ -7,6 +7,7 @@
     <!-- <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->  
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
     <title>Bank Event</title>
+    <meta name="description=" content="은행 이벤트 정보 페이지, 은행 상품정보 페이지 모음을 제공합니다.">
   </head>
   <body>  
     <!-- <div id="example" style="width: 500px;">
@@ -21,16 +22,28 @@
       <div class = "indicator"></div>
       <webview id = "foo" src = "https://www.kakaobank.com/events" style = "width:400px; height:480px;"></webview>            
    </div> -->
-   <img src="banner2.png">
-   <select id="cars">
-    <option value="bank_1">카카오뱅크</option>
-    <option value="bank_2">우리은행</option>
-    <option value="bank_3">신한은행</option>
-    <option value="bank_4">농협</option>
-    </select>
-    <input type="radio" name="page_type" value="event_page" checked="checked">이벤트 페이지
-    <input type="radio" name="page_type" value="product_page">상품정보 페이지
+  <header>
+   <a href="index.html"><img src="images/banner2.png" alt="Bank Event 배너"></a>
+  </header>  
+  <nav>
+    <select id="bank_type" onchange=OnChangeBankType()>
+      <option value="kakao_bank">카카오뱅크</option>
+      <option value="woori_bank">우리은행</option>
+      <option value="shinhan_bank">신한은행</option>
+      <option value="nonghyup_bank">농협</option>
+      </select>
+      <input type="radio" name="page_type" id="event_page" value="event_page" checked="checked" onclick=OnClickPageType(PAGE_TYPE.EVENT_PAGE)>
+      <label for="event_page">이벤트 페이지</label>
+      <input type="radio" name="page_type" id="product_page" value="product_page" onclick=OnClickPageType(PAGE_TYPE.PRODUCT_PAGE)>
+      <label for="product_page">상품정보 페이지</label>
+  </nav>   
+  <article>
     <webview id = "foo" src = "https://www.kakaobank.com/events" style = "width:100%; height:800px;"></webview>            
+  </article>
+  <footer>
+    <a href="https://github.com/gemnagame/">Gemna's github</a>
+  </footer>
+  
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>
   </body>
