@@ -1,0 +1,36 @@
+{
+    "banks":
+    [
+        {
+            "id":"kakao_bank",
+            "name":"카카오뱅크",
+            "event_page":"https://www.kakaobank.com/events",
+            "product_page":"https://www.kakaobank.com/products/withdrawal"
+        },
+        {
+            "id":"woori_bank",
+            "name":"우리은행",
+            "event_page":"https://spot.wooribank.com/pot/Dream?withyou=EVEVT0001",
+            "product_page":"https://spot.wooribank.com/pot/Dream?withyou=po"
+        },
+        {
+            "id":"shinhan_bank",
+            "name":"신한은행",
+            "event_page":"https://www.shinhan.com/hpe/index.jsp#902304010000",
+            "product_page":"https://bank.shinhan.com/index.jsp#020001000000"
+        },
+        {
+            "id":"kb_bank",
+            "name":"KB국민은행",
+            "event_page":"https://omoney.kbstar.com/quics?page=oevent&QSL=F#loading",
+            "product_page":"https://obank1.kbstar.com/quics?page=C030037"
+        }
+
+    ],
+
+    "page_type":
+    {
+        "event_page":"이벤트 페이지",
+        "product_page":"상품정보 페이지"
+    }
+}

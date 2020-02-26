@@ -11,7 +11,8 @@ var BANK_TYPE = {
     KAKAO_BANK : 1,
     WOORI_BANK : 2,
     SHINHAN_BANK : 3,
-    NONGHYUP_BANK : 4
+    KB_BANK : 4
+    //NONGHYUP_BANK : 5
 }
 
 var PAGE_TYPE = {
