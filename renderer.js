@@ -82,3 +82,18 @@ function ShowScreenshot(html_element) {
         }
     });
 }
+
+loadJson();
+
+function loadJson() {
+	var fileReader = new XMLHttpRequest();
+	fileReader.open('GET', 'bank_data.json', true);
+	fileReader.onload = function() {
+		if (fileReader.status == 200) {
+            var json_data = JSON.parse(fileReader.responseText);
+            alert(json_data.banks[0].name);//test
+			
+		}
+	};
+	fileReader.send(null);
+}
